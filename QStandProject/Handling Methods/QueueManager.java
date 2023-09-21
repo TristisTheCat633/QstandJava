@@ -8,6 +8,7 @@ public class QueueManager {
     private List<BigTaxi> availableBigTaxis = new LinkedList<>();
     private List<Van> availableVans = new LinkedList<>();
 
+
     private Map<String, Integer> vanTimeSlotBookings = new HashMap<>();
 
     private static QueueManager instance;
@@ -49,19 +50,21 @@ public class QueueManager {
         }
     }
 
-    public Van bookVan() {
-        if (availableVans.isEmpty()) {
-            return null;
-        } else {
-            return availableVans.remove(0);
+    public void bookVanSlot(String timeSlot) throws QueueManagerExceptions {
+        String[] validTimeSlots = {"09:00 AM", "11:00 AM", "01:00 PM", "03:00 PM", "05:00 PM", "07:00 PM", "09:00 PM"};
+        if (!Arrays.asList(validTimeSlots).contains(timeSlot)) {
+            throw new QueueManagerExceptions("Invalid time slot format! Please use the format HH:MM AM/PM.");
         }
-    }
-
-    public void bookVanSlot(String timeSlot) {
         int currentBookings = vanTimeSlotBookings.getOrDefault(timeSlot, 0);
         vanTimeSlotBookings.put(timeSlot, currentBookings + 1);
         if (currentBookings + 1 == Van.VAN_CAPACITY) {
             bookVan();
+        }
+    }
+
+    public void bookVan() {
+        if (!availableVans.isEmpty()) {
+            availableVans.remove(0);
         }
     }
 

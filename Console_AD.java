@@ -91,10 +91,9 @@ public class Console_AD {
         DashboardDisplay();
         
     }
-    public void Logout(){
-        System.out.println("You have logged out successfully." +
-                "Thanks for using Q-Stand!");
+    public void Logout() throws QueueManagerExceptions {
+        System.out.println("You have logged out successfully. Thanks for using Q-Stand!");
+        Tris = null;
+        Main.startConsole();
     }
-
-
 }

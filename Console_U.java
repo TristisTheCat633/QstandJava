@@ -154,8 +154,9 @@ public class Console_U {
         }
     }
 
-    public void Logout() {
-        System.out.println("\nYou have logged out successfully. Thanks for using Q-Stand!");
+    public void Logout() throws QueueManagerExceptions {
+        System.out.println("You have logged out successfully. Thanks for using Q-Stand!");
         currentUser = null;
+        Main.startConsole();
     }
 }

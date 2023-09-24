@@ -1,34 +1,32 @@
 package QStandProject;
-
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws QueueManagerExceptions {
+        startConsole();
+    }
 
+    public static void startConsole() throws QueueManagerExceptions {
+        Console_U interF_U = null;
+        Console_AD interF_AD = null;
 
-    	Admin Tris = new Admin("admin1", "password1");
-    	Customer Potato = new Customer("Potato", "password1");
-    	Customer Watermelon = new Customer("Watermelon", "password2");
-    	Customer Papaya = new Customer("Papaya", "password3");
+        System.out.println("\nWelcome to Q-Stand\n");
+        System.out.println("Are you a customer or an admin?");
+        System.out.println("1.Customer");
+        System.out.println("2.Admin");
 
-
-
-        Tris.addTaxi("Regular", "4E1412");
-        Tris.addTaxi("Big", "5F5612");
-        Tris.addTaxi("Van", "6G9112");
-        Tris.addTaxi("Regular", "1D2412");
-        Tris.addTaxi("Big", "3E1312");
-        Tris.addTaxi("Van", "9K4312");
-
-        Potato.login("Potato", "password1");
-        Potato.viewAvailability();
-        Potato.bookTaxi();
-
-        Watermelon.login("Watermelon", "password2");
-        Watermelon.viewAvailability();
-        Watermelon.bookTaxi();
-
-        Papaya.login("Papaya", "password3");
-        Papaya.viewAvailability();
-        Papaya.displayVanSchedule();
-        Papaya.prebookVan(Papaya, "10:00AM");
+        Scanner s = new Scanner(System.in);
+        int choice = s.nextInt();
+        if (choice == 1) {
+            interF_U = new Console_U();
+            interF_U.display();
+        } else if (choice == 2) {
+            interF_AD = new Console_AD();
+            interF_AD.display();
+        } else {
+            System.out.println("Invalid choice. Exiting.");
+        }
+        interF_U = null;
+        interF_AD = null;
+        s.close();
     }
 }
